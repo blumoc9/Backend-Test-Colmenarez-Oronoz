@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     "django_extensions",
     "backend_test.utils",
     "crispy_forms",
-    "core"
+    "core",
+    "menu"
 ]
 
 #Template Use

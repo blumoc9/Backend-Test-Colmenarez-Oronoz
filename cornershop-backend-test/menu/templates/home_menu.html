@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Menu uuid</th>
+        <th scope="col">Menu Publish Date</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for menu in menu_list  %}
+    <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ menu.uuid }}</td>
+        <td>{{ menu.published_date }}</td>
+        <td> <a href="{% url 'menu_details_uuid' menu.uuid %}" class="btn btn-primary">
+            <span class="bold">Add plates</span>
+        </a></td>
+    </tr>
+    {% empty %}
+        <h3>No Nora's Menu Today</h3>
+    <div class="row">
+        <div class="col s12 md6 xl3">
+            <a href="{% url 'menu_add' %}" class="btn btn-primary">
+                <span class="bold">Add Menu</span>
+            </a>
+        </div>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
+

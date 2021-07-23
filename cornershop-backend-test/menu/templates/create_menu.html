@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container">
+  <h1> NorasCreate Menu</h1>
+  <hr>
+
+  <form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit" class="btn">Save</button>
+
+    <a href="{% url 'menu:index' %}" class="btn btn-primary">
+      <span class="bold">View List</span>
+    </a>
+
+  </form>
+
+</div>
+{% endblock %}
