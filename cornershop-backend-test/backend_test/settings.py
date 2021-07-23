@@ -49,7 +49,9 @@ INSTALLED_APPS = [
     "backend_test.utils",
     "crispy_forms",
     "core",
-    "menu"
+    "menu",
+    "slack_reminder",
+    "order"
 ]
 
 #Template Use
@@ -152,8 +154,8 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, "../collected_static")
 STATIC_URL = "/static/"
 
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'core:home_menu'
+LOGOUT_REDIRECT_URL = 'login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

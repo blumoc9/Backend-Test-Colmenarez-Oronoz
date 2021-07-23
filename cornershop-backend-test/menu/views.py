@@ -21,7 +21,7 @@ def home_menu(request):
 
 
 @login_required(login_url="/accounts/login/")
-def menu_create(request):
+def create(request):
     """
     Validates te request to add a new Menu or return the found validations
     """
@@ -32,10 +32,12 @@ def menu_create(request):
             published_date = form.cleaned_data['published_date_input']
             try:
                 menu = Menu.objects.create(uuid=uuid4(), published_date=published_date).save()
-                return redirect('menu_add', menu)
+                return redirect('menu:create', menu)
             except Exception as e:
                 raise FieldError('Menu The date has been register')
     else:
         form = MenuForm()
 
     return render(request, 'add_menu.html', {'form': form})
+
+

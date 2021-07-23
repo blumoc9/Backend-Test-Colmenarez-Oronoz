@@ -22,6 +22,6 @@ from core.views import home, signup
 app_name = 'core'
 
 urlpatterns = [
-    path('', home, name='home'),
+    path('home/', home, name='home_menu'),
     path('signup/', signup, name='signup'),
 ]
