@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h1>Menu for Today</h1>
+  <h6><b>UUID:{{menu.uuid}}</b></h6>
+  <hr>
+
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Description Menu</th>
+      <th scope="col">Is Vegan</th>
+      <th scope="col">Menu Date</th>
+      <th scope="col">Code Option Menu</th>
+    </tr>
+    </thead>
+    {% for option in options %}
+    <tbody>
+    <tr>
+      <th scope="row"></th>
+      <td>{{ option.description}}</td>
+      <td>{{ option.is_vegan }}</td>
+      <td>{{ option.publish_date }}</td>
+      <td>{{ option.code }}</td>
+      <td>
+        <a href="{% url 'option:option_menu_add' menu.uuid %}" class="btn btn-sm btn-primary">
+          <span class="bold">ADD PLATE</span>
+        </a>
+        <a href="{% url 'option:option_menu_edit' menu.uuid %}" class="btn btn-sm btn-danger">
+          <span class="bold">EDIT</span>
+        </a>
+        <a href="{% url 'option:options_menu_details_by_uuid' menu.uuid %}" class="btn btn-sm btn-warning">
+          <span class="bold">Detail Menu</span>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+
+    {% empty %}
+    <div class="">
+      <h3 class="grey-text">Option of menu not loaded!!!</h3>
+    </div>
+    {% endfor %}
+  </table>
+
+</div>
+{% endblock %}
+

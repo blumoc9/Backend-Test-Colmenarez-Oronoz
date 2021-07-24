@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from menu.models import Menu
 from option.forms import OptionMenuForm
 from option.models import Option
+from django.urls import reverse
 
 
 @login_required(login_url="/accounts/login")
@@ -20,13 +21,11 @@ def option_menu_add(request, uuid):
         if form.is_valid():
             description = form.cleaned_data.get('description')
             is_vegan = form.cleaned_data.get('is_vegan')
-            chef_comments = form.cleaned_data.get('chef_comments')
             menu = Menu.objects.filter(uuid=uuid)
             Option.objects.create(menu_id=menu[0].id, description=description, is_vegan=is_vegan
                                   , publish_date=menu[0].published_date
                                   , code=uuid4()).save()
-            return redirect('menu:list_menu', {'form': form, 'uuid': uuid})
-            #return render(request, 'menu/list_menu.html', {'form': form, 'uuid': uuid})
+            return redirect(reverse('menu_nora:list_menu'), {'form': form, 'uuid': uuid})
     else:
         form = OptionMenuForm()
 
@@ -54,7 +53,7 @@ def option_menu_edit(request, uuid):
     return render(request, 'option_details.html', context)
 
 
-def menu_details_uuid(request, uuid):
+def options_menu_details_by_uuid(request, uuid):
     """
     Search a Menu and its Options by an uuid
     """
@@ -63,4 +62,4 @@ def menu_details_uuid(request, uuid):
 
     context = {'menu': menu, 'options': options}
 
-    return render(request, 'menu_details.html', context)
+    return render(request, 'options_menu_details_by_uuid.html', context)
