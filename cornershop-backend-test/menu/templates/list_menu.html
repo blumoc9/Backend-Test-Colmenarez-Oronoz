@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h1>Menu List | {{today}}</h1>
+    <hr>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Publish Date Menu</th>
+            <th scope="col">UUID</th>
+            <th scope="col">NAME</th>
+            <th scope="col">ACTIONS</th>
+        </tr>
+        </thead>
+        {% for menu in menu_list %}
+        <tbody>
+        <tr>
+            <th scope="row"></th>
+            <td>{{ menu.published_date}}</td>
+            <td>{{ menu.uuid }}</td>
+            <td>{{ menu.name }}</td>
+            <td>{{ menu.name }}</td>
+        </tr>
+        </tbody>
+
+        {% empty %}
+        <div class="">
+            <h3 class="grey-text">There aren't menu for today!!!</h3>
+        </div>
+        {% endfor %}
+    </table>
+
+</div>
+{% endblock %}

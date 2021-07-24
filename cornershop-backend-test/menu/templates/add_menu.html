@@ -1,17 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-  <h1>Create Menu</h1>
-  <hr>
-  <form method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit" class="btn btn-primary">Save</button>
-    <a href="{% url 'menu' %}" class="btn">
-      <span class="bold">View List</span>
-    </a>
-
-  </form>
-
+    <h5>{{error_message}}</h5>
+    <h1>Create Menu</h1>
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form }}
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save menu</button>
+         <a href="{% url 'menu_nora:list_menu' %}" class="btn btn-primary">
+           <span class="bold">Show List</span>
+         </a>
+        </div>
+    </form>
 </div>
+<script type="text/javascript">
+    var input = document.getElementById('id_publish_date_input');
+    input.type = 'date';
+    var today = new Date();
+    var _month = (Number.parseInt(today.getMonth().toString(), 10) + 1)
+    var month = (today.getMonth() < 10 ? "0" + _month : _month)
+    var date = today.getFullYear() + '-' + month + '-' + today.getDate()
+    input.setAttribute("min", date);
+    input.value = date;
+</script>
 {% endblock %}

@@ -23,6 +23,6 @@ urlpatterns = [
     path("healthz", healthz, name="healthz"),
     path('', home, name="login"),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('core/', include('core.urls')),
-    path('menu/', include('menu.urls'))
+    path('core/', include('core.urls', namespace="core")),
+    path('menu/', include('menu.urls', namespace="menu_nora"))
 ]

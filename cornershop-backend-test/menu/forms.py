@@ -1,6 +1,7 @@
-from django import forms
+import datetime
 
-from menu.models import Menu
+from django import forms
+from datetime import datetime
 
 """
 Create form only parameter date, because when save the objectMenu 
@@ -8,10 +9,6 @@ will generate uuid  with uuid4
 """
 
 
-class MenuForm(forms.ModelForm):
-    class Meta:
-        model = Menu
-        fields = ['name', 'published_date']
-
-
-
+class MenuForm(forms.Form):
+    name = forms.CharField(max_length=50)
+    publish_date_input = forms.CharField()
