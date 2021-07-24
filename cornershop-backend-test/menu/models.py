@@ -9,5 +9,5 @@ class Menu(models.Model):
     """
     uuid = models.CharField(max_length=50, default="")
     name = models.CharField(max_length=50, default="")
-    published_date = models.CharField(max_length=50, default="", unique=True)
+    published_date = models.CharField(max_length=10, default="", unique=True)
     update_date = models.TextField()

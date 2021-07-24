@@ -4,7 +4,7 @@
     <h1>Menu List | {{today}}</h1>
     <hr>
 
-    <table class="table">
+    <table class="table table-hover">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -16,12 +16,22 @@
         </thead>
         {% for menu in menu_list %}
         <tbody>
-        <tr>
+        <tr >
             <th scope="row"></th>
             <td>{{ menu.published_date}}</td>
             <td>{{ menu.uuid }}</td>
             <td>{{ menu.name }}</td>
-            <td>{{ menu.name }}</td>
+            <td>
+                <a href="{% url 'option:option_menu_add' menu.uuid %}" class="btn btn-primary">
+                    <span class="bold">ADD</span>
+                </a>
+                <a href="{% url 'option:option_menu_edit' menu.uuid %}" class="btn btn-danger">
+                    <span class="bold">EDIT</span>
+                </a>
+                <a href="{% url 'option:option_menu_edit' menu.uuid %}" class="btn btn-warning">
+                    <span class="bold">List Options</span>
+                </a>
+            </td>
         </tr>
         </tbody>
 

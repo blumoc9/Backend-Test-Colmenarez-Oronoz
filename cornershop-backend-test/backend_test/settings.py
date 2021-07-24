@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     "core",
     "menu",
     "slack_reminder",
-    "order"
+    "order",
+    "option",
 ]
 
 #Template Use

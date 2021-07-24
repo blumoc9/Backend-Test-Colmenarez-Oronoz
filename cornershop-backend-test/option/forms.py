@@ -1,12 +1,11 @@
 from django import forms
-
-from menu.models import Menu
+from .models import Option
 
 
 class OptionMenuForm(forms.ModelForm):
-    """
-    Defines MenuDetail fields
-    """
+    """Defines the MenuDetail data fields"""
+
     class Meta:
-        model = Menu
-        fields = ['name', 'published_date']
+        model = Option
+        fields = ('description', 'is_vegan')
+
