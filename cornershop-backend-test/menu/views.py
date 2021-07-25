@@ -1,4 +1,4 @@
-import uuid
+
 from uuid import uuid4
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
@@ -9,7 +9,6 @@ from .forms import MenuForm
 from datetime import datetime
 # Create your views here.
 from .models import Menu
-from django.utils.dateparse import parse_datetime
 
 activate(settings.TIME_ZONE)
 
@@ -23,6 +22,10 @@ def home_menu(request):
     menu_list = Menu.objects.filter(published_date__gte=today).order_by('published_date')
 
     return render(request, 'home_menu.html', {'menu_list': menu_list, 'today': today})
+
+
+def show_error(error, form, request):
+    return render(request, 'add_menu.html', {'form': form, 'error_message': error})
 
 
 @login_required(login_url="/accounts/login/")
@@ -47,14 +50,10 @@ def create(request):
     return render(request, 'add_menu.html', {'form': form, 'today': today})
 
 
-def show_error(error, form, request):
-    return render(request, 'add_menu.html', {'form': form, 'error_message': error})
-
-
 @login_required(login_url="/accounts/login")
 def menu_add(request):
     """
-    Validates te request to add a new Menu or return the found validations
+    Validates te request to add a new Menu
     """
     if request.method == 'POST':
         form = MenuForm(request.POST)

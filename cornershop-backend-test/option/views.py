@@ -62,3 +62,12 @@ def options_menu_details_by_uuid(request, uuid):
     context = {'menu': menu[0], 'options': options}
 
     return render(request, 'options_menu_details_by_uuid.html', context)
+
+
+def option_menu_delete(request, uuid):
+    if request.method == 'GET':
+        option = get_object_or_404(Option, code=uuid)
+        option.delete()
+        return redirect('options_menu:options_menu_details_by_uuid', option.menu.uuid)
+    else:
+        return redirect('menu_nora:list_menu')
