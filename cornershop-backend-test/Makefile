@@ -23,7 +23,6 @@ rebuild: ## rebuild base Docker images
 
 .PHONY: reset
 reset: ## update Docker images and reset local databases
-reset: ecr-signin
 	@docker-compose down --volumes --remove-orphans
 	@docker-compose pull
 

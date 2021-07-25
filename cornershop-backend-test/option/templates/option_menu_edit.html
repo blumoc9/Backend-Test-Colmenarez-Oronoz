@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h1> Edit option to Menu </h1>
+    <hr>
+    <span> <b>UUID MENU : {{uuid}} | Date Menu : </b> </span>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form }}
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save</button>
+
+            <a href="{% url 'menu:index' %}" class="btn btn-primary">
+                <span class="bold">View List</span>
+            </a>
+        </div>
+    </form>
+
+</div>
+{% endblock %}
+

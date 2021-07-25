@@ -20,18 +20,17 @@
     <tr>
       <th scope="row"></th>
       <td>{{ option.description}}</td>
-      <td>{{ option.is_vegan }}</td>
+      <td>{{ option.is_vegan|yesno }}</td>
       <td>{{ option.publish_date }}</td>
       <td>{{ option.code }}</td>
       <td>
-        <a href="{% url 'option:option_menu_add' menu.uuid %}" class="btn btn-sm btn-primary">
-          <span class="bold">ADD PLATE</span>
-        </a>
-        <a href="{% url 'option:option_menu_edit' menu.uuid %}" class="btn btn-sm btn-danger">
+
+        <a href="{% url 'option:option_menu_edit' option.code %}" class="btn btn-sm btn-success">
           <span class="bold">EDIT</span>
         </a>
-        <a href="{% url 'option:options_menu_details_by_uuid' menu.uuid %}" class="btn btn-sm btn-warning">
-          <span class="bold">Detail Menu</span>
+
+        <a href="{% url 'option:options_menu_details_by_uuid' option.code %}" class="btn btn-sm btn-danger">
+          <span class="bold">Delete</span>
         </a>
       </td>
     </tr>

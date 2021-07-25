@@ -44,7 +44,7 @@ services:
   postgres:
     image: circleci/postgres:12.3-postgis
     volumes:
-      - postgres12-data:/var/lib/postgresql/data/
+      - postgres1234-data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -65,7 +65,7 @@ services:
       - redis-data:/data
 
 volumes:
-  postgres12-data: {}
+  postgres1234-data: {}
   redis-data: {}
   elasticsearch-data: {}
   dynamodb-data: {}

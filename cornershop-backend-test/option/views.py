@@ -24,7 +24,7 @@ def option_menu_add(request, uuid):
             menu = Menu.objects.filter(uuid=uuid)
             Option.objects.create(menu_id=menu[0].id, description=description, is_vegan=is_vegan
                                   , publish_date=menu[0].published_date
-                                  , code=uuid4()).save()
+                                  , code=uuid4(), menu_uuid=uuid).save()
             return redirect(reverse('menu_nora:list_menu'), {'form': form, 'uuid': uuid})
     else:
         form = OptionMenuForm()
@@ -37,29 +37,28 @@ def option_menu_edit(request, uuid):
     """
     Validates the request to edit an Option or return the found validations
     """
-    option = get_object_or_404(Option, uuid=uuid)
 
+    option = get_object_or_404(Option, code=uuid)
     if request.method == 'POST':
-        form = OptionMenuForm(request.POST)
-
+        form = OptionMenuForm(request.POST, instance=option)
         if form.is_valid():
-            option.description = form.cleaned_data['description']
-            option.save()
-            return redirect('menu:details_uuid', option.menu.uuid)
+            form = OptionMenuForm(request.POST, instance=option)
+            form.save()
+            return redirect('options_menu:options_menu_details_by_uuid', option.menu.uuid)
     else:
-        form = OptionMenuForm(data={'description': option.description})
+        form = OptionMenuForm(instance=option)
+        form.save(commit=False)
 
-    context = {'form': form, 'option': option}
-    return render(request, 'option_details.html', context)
+    return render(request, 'option_menu_edit.html', {'form': form})
 
 
 def options_menu_details_by_uuid(request, uuid):
     """
-    Search a Menu and its Options by an uuid
+    options menu by uuid
     """
-    menu = get_object_or_404(Menu, uuid=uuid)
-    options = Option.objects.filter(menu_id=menu.id)
+    menu = Menu.objects.filter(uuid=uuid)
+    options = Option.objects.filter(menu_id=menu[0].id)
 
-    context = {'menu': menu, 'options': options}
+    context = {'menu': menu[0], 'options': options}
 
     return render(request, 'options_menu_details_by_uuid.html', context)

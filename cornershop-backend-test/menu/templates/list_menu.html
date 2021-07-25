@@ -25,8 +25,8 @@
                 <a href="{% url 'option:option_menu_add' menu.uuid %}" class="btn btn-sm btn-primary">
                     <span class="bold">ADD PLATE</span>
                 </a>
-                <a href="{% url 'option:option_menu_edit' menu.uuid %}" class="btn btn-sm btn-danger">
-                    <span class="bold">EDIT</span>
+                <a href="{% url 'menu:menu_delete' menu.uuid %}" class="btn btn-sm btn-danger">
+                    <span class="bold">Delete</span>
                 </a>
                 <a href="{% url 'option:options_menu_details_by_uuid' menu.uuid %}" class="btn btn-sm btn-warning">
                     <span class="bold">Detail Menu</span>

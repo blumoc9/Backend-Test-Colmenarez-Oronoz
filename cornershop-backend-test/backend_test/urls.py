@@ -25,5 +25,5 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('core/', include('core.urls', namespace="core")),
     path('menu/', include('menu.urls', namespace="menu_nora")),
-    path('option/', include('option.urls'))
+    path('option/', include('option.urls', namespace="options_menu"))
 ]
