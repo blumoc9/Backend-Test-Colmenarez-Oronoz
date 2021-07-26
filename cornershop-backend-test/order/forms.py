@@ -11,5 +11,5 @@ class OrderMenuForm(forms.ModelForm):
         fields = ('customization', 'phone_number')
         labels = {
             'customization': 'customizations(e.g no tomatoes in salad)',
-            'phone_number': 'cellphone (eg: 569xxxxxxxx)'
+            'phone_number': 'cellphone (eg: 569xxxxxx99)'
         }

@@ -45,17 +45,23 @@ def order_add(request, uuid):
     """
     error_message = None
     option = get_object_or_404(Option, code=uuid)
-
+    today = datetime.today().strftime("%Y-%m-%d")
     if request.method == 'POST':
         form = OrderMenuForm(request.POST)
-        customization = form.cleaned_data.get('customization')
-        phone_number = form.cleaned_data.get('customization')
+        print(request.POST)
         if is_time_limit() and form.is_valid():
-            order = Order.objects.create(phone_number=phone_number, customization=customization,
+            username = request.POST['username']
+            customization = request.POST['customization']
+            phone_number = request.POST['phone_number']
+            order = Order.objects.create(customization=customization,
+                                         username=username,
                                          option=option,
-                                         order_uuid=uuid4(), **form.cleaned_data)
+                                         option_uuid=uuid,
+                                         phone_number=phone_number,
+                                         order_uuid=uuid4(),
+                                         order_date=today)
             order.save()
-            return redirect('menu:order_details', order.uuid)
+            return redirect('order:order_details', order.order_uuid)
         error_message = message_error_hour_validation()
     else:
         form = OrderMenuForm()
@@ -63,3 +69,26 @@ def order_add(request, uuid):
     return render(request,
                   'add_order.html',
                   {'form': form, 'option': option, 'error_message': error_message})
+
+
+@login_required(login_url='/accounts/login')
+def order_details(request, uuid):
+    """
+    Search a Menu and its Options by an uiid
+    """
+    order = get_object_or_404(Order, order_uuid=uuid)
+
+    return render(request, 'detail_order.html', {'order': order})
+
+
+@login_required(login_url='/accounts/login')
+def list_order_by_user(request):
+    """
+    Returns a list  of options of menu for today
+    """
+    username = request.user.username
+    print(request.user.username)
+    today = datetime.today().strftime("%Y-%m-%d")
+    order_list = Order.objects.filter(username=username, order_date__gte=today).order_by('customization')
+
+    return render(request, 'list_order.html', {'order_list': order_list, 'today': today})

@@ -17,7 +17,7 @@
         {% for menu in menu_list %}
         <tbody>
         <tr>
-            <th scope="row"></th>
+            <th scope="row">{{ forloop.counter }}</th>
             <td>{{ menu.published_date}}</td>
             <td>{{ menu.uuid }}</td>
             <td>{{ menu.name }}</td>

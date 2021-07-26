@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% if error_message %}
+<div class="alert alert-danger" role="alert">
+    <b>{{error_message}}</b>
+</div>
+{% endif %}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Meal</th>
+        <th scope="col">Customization</th>
+        <th scope="col">Username</th>
+        <th scope="col">Cellphone</th>
+        <th scope="col">Processed Order status</th>
+        <th scope="col">Order date</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for order in order_list %}
+    <tbody>
+    <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ order.option.description}}</td>
+        <td>{{ order.customization}}</td>
+        <td>{{ order.username |title}}</td>
+        <td>Send msg : <a href="https://wa.me/{{ order.phone_number }}/?text=Processing your Order">{{ order.phone_number}} </a></td>
+        <td>{{ order.status_order| yesno }}</td>
+        <td>{{ order.order_date }}</td>
+    </tr>
+    </tbody>
+
+    {% empty %}
+    <div class="">
+        <h3 class="grey-text">There aren't menu for today!!!</h3>
+    </div>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+{% endblock %}
+

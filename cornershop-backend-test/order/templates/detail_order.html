@@ -1,0 +1,51 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="container">
+  <div class="alert alert-success" role="alert">
+    Your order was created<a href="#" class="alert-link"> successfuly</a>.
+  </div>
+  <h1>Order Detail </h1>
+  <hr>
+
+  <div class="row">
+    <div class="col s12 md6 xl3">
+      Date of order:
+    </div>
+    <div class="col s12 md6 xl3">
+      <b>{{ order.option.menu.published_date }}</b>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12 md6 xl3">
+      Meal selected:
+    </div>
+    <div class="col s12 md6 xl3">
+      <b>{{ order.option.description }}</b>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12 md6 xl3">
+      Cellphone:
+    </div>
+    <div class="col s12 md6 xl3">
+      <b>{{ order.phone_number }}</b>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12 md6 xl3">
+      Customization:
+    </div>
+    <div class="col s12 md6 xl3">
+      <b>{{ order.customization }}</b>
+    </div>
+  </div>
+
+
+</div>
+{% endblock %}
