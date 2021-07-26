@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
+from backend_test.celery import app
 from option.models import Option
 from order.forms import OrderMenuForm
 from order.models import Order
@@ -12,7 +13,8 @@ from order.timeutils import is_time_limit
 from .messagevalidation import message_error_hour_validation
 
 
-def home_order(request):
+@app.task(bind=True)
+def home_order(self,request):
     """
     Returns a list  of options of menu for today
     """

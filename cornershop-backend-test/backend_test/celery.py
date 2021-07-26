@@ -2,7 +2,9 @@ import os
 
 from celery import Celery
 
+from slack_reminder.slackconfig import SLACK_WEBHOOK, DEFAULT_OPTIONS
 from .envtools import getenv
+from celery_slack import Slackify
 
 
 class CelerySettings:
@@ -68,5 +70,6 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend_test.settings")
 settings = CelerySettings()
 
 app = Celery("backend_test")
+slack_app = Slackify(app, SLACK_WEBHOOK, DEFAULT_OPTIONS)
 app.config_from_object(settings)
 app.autodiscover_tasks()

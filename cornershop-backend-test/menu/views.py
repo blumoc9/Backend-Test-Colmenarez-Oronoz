@@ -1,9 +1,10 @@
 from uuid import uuid4
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from django.utils.timezone import activate, timezone
+from django.utils.timezone import activate
 
 from backend_test import settings
+from backend_test.celery import app
 from option.models import Option
 from order.forms import OrderMenuForm
 from order.models import Order
@@ -16,6 +17,7 @@ from .models import Menu
 activate(settings.TIME_ZONE)
 
 
+@app.task
 @login_required(login_url="/accounts/login/")
 def home_menu(request):
     """
