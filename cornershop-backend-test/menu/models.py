@@ -10,4 +10,7 @@ class Menu(models.Model):
     uuid = models.CharField(max_length=50, null=False, unique=True, blank=False, default="")
     name = models.CharField(max_length=50, default="")
     published_date = models.CharField(max_length=10, default="", unique=True)
-    update_date = models.TextField()
+    update_date = models.CharField(max_length=10, default="")
+
+    def __str__(self):
+        return self.name

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% if error_message %}
+<div class="alert alert-danger" role="alert">
+    <b>{{error_message}}</b>
+</div>
+{% endif %}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Description</th>
+        <th scope="col">Menu Publish Date</th>
+        <th scope="col">Is Vegan</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for menu in menu_list %}
+    <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ menu.description }}</td>
+        <td>{{ menu.publish_date }}</td>
+        <td>{{ menu.is_vegan |yesno }}</td>
+        <td>{{ menu.menu_uuid }}</td>
+        <td>
+            <a href="{% url  'order:order_add' menu.code %}" class="btn btn-primary">
+                <span class="bold">Order Now</span>
+            </a>
+            <!-- {% if is_time_limit %}
+             <a href="{url 'order:'}" class="btn btn-primary">
+               <span class="bold">Order Now</span>
+             </a>
+             {% else %}
+              <b>Not Available to order</b>
+             {% endif %}-->
+        </td>
+    </tr>
+    {% empty %}
+    <h3>No Nora's Menu Today</h3>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+

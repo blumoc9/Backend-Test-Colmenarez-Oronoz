@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.urls import path, include
 
-import menu
 from .utils.healthz import healthz
 from core.views import home
 
@@ -25,5 +24,6 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('core/', include('core.urls', namespace="core")),
     path('menu/', include('menu.urls', namespace="menu_nora")),
-    path('option/', include('option.urls', namespace="options_menu"))
+    path('option/', include('option.urls', namespace="options_menu")),
+    path('order/', include('order.urls', namespace="order_of_menu"))
 ]

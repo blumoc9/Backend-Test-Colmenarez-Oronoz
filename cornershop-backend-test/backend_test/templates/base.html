@@ -24,14 +24,14 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
     <div class="container">
-      <a class="navbar-brand" href="">Nora Chilean Food</a>
+      <a class="navbar-brand" href="{% url 'login' %}">Nora Chilean Food</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="">Home</a>
+            <a class="nav-link" href="{% url 'order:index' %}">Menu of the Day</a>
           </li>
           {% if user.is_authenticated %}
 
@@ -88,6 +88,13 @@
           <a href="#" class="nav-link link-dark">
             <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
             Customers
+          </a>
+        </li>
+
+        <li>
+          <a href="{% url 'order:index' %}" class="nav-link link-dark">
+            <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
+            Menu of the day
           </a>
         </li>
       </ul>
