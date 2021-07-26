@@ -5,6 +5,7 @@
 * `Download this project`
 * `Open terminal/cmd in your S.O`
 * `In the terminal execute -->  cd your-folder/Backend-test-Colmenarez-Oronoz-master`
+*  you need to modified the variable `SLACK_WEBHOOK` and set your webhook url en the file `slackconfig.py` in the app slack_reminder
 
 ### Running the development environment
 
