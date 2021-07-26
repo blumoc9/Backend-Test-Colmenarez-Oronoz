@@ -65,29 +65,26 @@
 
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
-
+        {% if user.is_authenticated and user.is_superuser  %}
         <li>
           <a href="{% url 'menu:create_menu' %}" class="nav-link link-dark">
             <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
             Create Menu
           </a>
         </li>
+        {% endif %}
+        {% if user.is_authenticated and user.is_superuser  %}
         <li>
           <a href="{% url 'menu:list_menu' %}" class="nav-link link-dark">
             <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
             List Menu
           </a>
         </li>
+        {% endif %}
         <li>
           <a href="{% url 'order:list_order_by_user' %}" class="nav-link link-dark">
             <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
             List of orders
-          </a>
-        </li>
-        <li>
-          <a href="#" class="nav-link link-dark">
-            <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-            Customers
           </a>
         </li>
 
