@@ -1,3 +1,5 @@
+![2021-07-26 17 38 28](docs/nora-employee-use-case.jpg)
+
 ## cornershop-backend-test
 
 ### First steps to run this project 
