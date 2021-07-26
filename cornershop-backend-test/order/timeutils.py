@@ -17,4 +17,4 @@ def is_time_limit():
                                                 second=limit_time_datetime.time().second,
                                                 microsecond=0)
 
-    return current_datetime < today_time_limit
+    return current_datetime > today_time_limit

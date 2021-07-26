@@ -18,13 +18,21 @@ def home_order(request):
     """
     today = datetime.today().strftime("%Y-%m-%d")
     menu_list = Option.objects.filter(publish_date=today).order_by('publish_date')
+    if is_time_limit():
+        error_message = message_error_hour_validation()
+    else:
+        error_message = ""
 
-    return render(request, 'home_order.html', {'menu_list': menu_list, 'today': today})
+    return render(request, 'home_order.html', {'menu_list': menu_list,
+                                               'today': today,
+                                               'error_message': error_message,
+                                               'is_time_limit': is_time_limit()
+                                               })
 
 
 def home_by_uuid(request, uuid):
     """
-    Returns a list  of options of menu for today
+    Returns a list  of options of menu for today by uuid
     """
     today = datetime.today().strftime("%Y-%m-%d")
     menu_list = Option.objects.filter(menu_uuid=uuid, publish_date=today).order_by('description')
@@ -48,7 +56,6 @@ def order_add(request, uuid):
     today = datetime.today().strftime("%Y-%m-%d")
     if request.method == 'POST':
         form = OrderMenuForm(request.POST)
-        print(request.POST)
         if is_time_limit() and form.is_valid():
             username = request.POST['username']
             customization = request.POST['customization']
@@ -74,7 +81,7 @@ def order_add(request, uuid):
 @login_required(login_url='/accounts/login')
 def order_details(request, uuid):
     """
-    Search a Menu and its Options by an uiid
+    Show detail of order by uuid
     """
     order = get_object_or_404(Order, order_uuid=uuid)
 

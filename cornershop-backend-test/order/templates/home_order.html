@@ -27,16 +27,13 @@
         <td>{{ menu.is_vegan |yesno }}</td>
         <td>{{ menu.menu_uuid }}</td>
         <td>
-            <a href="{% url  'order:order_add' menu.code %}" class="btn btn-primary">
+            {% if is_time_limit %}
+            <b>Not Available to order</b>
+            {% else %}
+            <a href="{% url 'order:order_add' menu.code %}" class="btn btn-primary">
                 <span class="bold">Order Now</span>
             </a>
-            <!-- {% if is_time_limit %}
-             <a href="{url 'order:'}" class="btn btn-primary">
-               <span class="bold">Order Now</span>
-             </a>
-             {% else %}
-              <b>Not Available to order</b>
-             {% endif %}-->
+            {% endif %}
         </td>
     </tr>
     {% empty %}
