@@ -13,8 +13,7 @@ from order.timeutils import is_time_limit
 from .messagevalidation import message_error_hour_validation
 
 
-@app.task(bind=True)
-def home_order(self,request):
+def home_order(request):
     """
     Returns a list  of options of menu for today
     """
@@ -90,13 +89,13 @@ def order_details(request, uuid):
     return render(request, 'detail_order.html', {'order': order})
 
 
+@app.task()
 @login_required(login_url='/accounts/login')
 def list_order_by_user(request):
     """
     Returns a list  of options of menu for today
     """
     username = request.user.username
-    print(request.user.username)
     today = datetime.today().strftime("%Y-%m-%d")
     order_list = Order.objects.filter(username=username, order_date__gte=today).order_by('customization')
 

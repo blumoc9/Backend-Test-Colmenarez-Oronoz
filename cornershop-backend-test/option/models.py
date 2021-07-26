@@ -13,3 +13,6 @@ class Option(models.Model):
     is_vegan = models.BooleanField(default=False)
     publish_date = models.CharField(max_length=10, default="")
     update_date = models.CharField(max_length=10, default="")
+
+    def __str__(self):
+        return self.code
