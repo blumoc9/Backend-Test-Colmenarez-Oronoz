@@ -15,7 +15,7 @@
 *  User :`cornershop`
 *  Password: `Yourpassword99*` 
 * `dev up`
-*  
+*  before to start read this [documentation](https://github.com/blumoc9/Backend-Test-Colmenarez-Oronoz/blob/master/cornershop-backend-test/docs/documentation.pdf)
 
 ##### Rebuilding the base Docker image
 
