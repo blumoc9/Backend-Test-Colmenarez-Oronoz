@@ -19,7 +19,7 @@ def home_order(request):
     """
     today = datetime.today().strftime("%Y-%m-%d")
     menu_list = Option.objects.filter(publish_date=today).order_by('publish_date')
-    if is_time_limit():
+    if not is_time_limit():
         error_message = message_error_hour_validation()
     else:
         error_message = ""
@@ -98,5 +98,17 @@ def list_order_by_user(request):
     username = request.user.username
     today = datetime.today().strftime("%Y-%m-%d")
     order_list = Order.objects.filter(username=username, order_date__gte=today).order_by('customization')
+
+    return render(request, 'list_order.html', {'order_list': order_list, 'today': today})
+
+
+@app.task()
+@login_required(login_url='/accounts/login')
+def list_order_today(request):
+    """
+    Returns a list  of options of menu for today
+    """
+    today = datetime.today().strftime("%Y-%m-%d")
+    order_list = Order.objects.filter(order_date__gte=today).order_by('customization')
 
     return render(request, 'list_order.html', {'order_list': order_list, 'today': today})

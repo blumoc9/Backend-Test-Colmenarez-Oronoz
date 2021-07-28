@@ -15,7 +15,10 @@
         <th scope="col">Description</th>
         <th scope="col">Menu Publish Date</th>
         <th scope="col">Is Vegan</th>
+        <th scope="col">UUID</th>
+        {% if user.is_authenticated and not user.is_superuser %}
         <th scope="col">Actions</th>
+        {% endif %}
     </tr>
     </thead>
     <tbody>
@@ -26,15 +29,17 @@
         <td>{{ menu.publish_date }}</td>
         <td>{{ menu.is_vegan |yesno }}</td>
         <td>{{ menu.menu_uuid }}</td>
+        {% if user.is_authenticated and not user.is_superuser %}
         <td>
             {% if is_time_limit %}
-            <b>Not Available to order</b>
-            {% else %}
             <a href="{% url 'order:order_add' menu.code %}" class="btn btn-primary">
                 <span class="bold">Order Now</span>
             </a>
+            {% else %}
+            <b>Not Available to order</b>
             {% endif %}
         </td>
+        {% endif %}
     </tr>
     {% empty %}
     <h3>No Nora's Menu Today</h3>

@@ -8,6 +8,7 @@
 * `Open terminal/cmd in your S.O`
 * `In the terminal execute -->  cd your-folder/Backend-test-Colmenarez-Oronoz-master`
 *  you need to modified the variable `SLACK_WEBHOOK` and set your webhook url en the file `slackconfig.py` in the app slack_reminder
+*  you need to export in you S.0 the next environment variable `LIMIT_TIME` with the next command: `export LIMIT_TIME="11:00:00"` and press enter
 
 ### Running the development environment
 

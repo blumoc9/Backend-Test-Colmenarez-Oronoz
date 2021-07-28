@@ -14,8 +14,10 @@
         <th scope="col">#</th>
         <th scope="col">Meal</th>
         <th scope="col">Customization</th>
+        {% if user.is_authenticated and user.is_superuser  %}
         <th scope="col">Username</th>
         <th scope="col">Cellphone</th>
+        {% endif  %}
         <th scope="col">Processed Order status</th>
         <th scope="col">Order date</th>
     </tr>
@@ -28,8 +30,10 @@
         <th scope="row">{{ forloop.counter }}</th>
         <td>{{ order.option.description}}</td>
         <td>{{ order.customization}}</td>
+        {% if user.is_authenticated and user.is_superuser  %}
         <td>{{ order.username |title}}</td>
         <td>Send msg : <a href="https://wa.me/{{ order.phone_number }}/?text=Processing your Order">{{ order.phone_number}} </a></td>
+        {% endif  %}
         <td>{{ order.status_order| yesno }}</td>
         <td>{{ order.order_date }}</td>
     </tr>

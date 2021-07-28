@@ -32,6 +32,8 @@ SESSION_COOKIE_HTTPONLY = True
 
 SERVER_URL = os.getenv("SERVER_URL", default="*")
 
+LIMIT_TIME = os.getenv('LIMIT_TIME', default="11:00:00")
+
 
 APPEND_SLASH = False
 
